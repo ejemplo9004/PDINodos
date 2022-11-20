@@ -15,7 +15,6 @@ class QDMGraphicsScene(QGraphicsScene):
         self.colorFondo = QColor("#1D1E23")
         self.colorDelgado = QColor("#18191D")
         self.colorGrueso = QColor("#0C0E0C")
-        # self.colorDelgado = QColor("#FFFFFF")
 
         self.lapizDelgado = QPen(self.colorDelgado)
         self.lapizDelgado.setWidth(1)

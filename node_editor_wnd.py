@@ -1,10 +1,14 @@
 from PyQt5.QtWidgets import *
 from node_graphics_scene import QDMGraphicsScene
-
+from node_graphics_view import QDMGraphicsView
+from diccionario import Diccionario
+from PyQt5.QtGui import *
+from PyQt5.QtCore import *
 
 class NodeEditorWnd(QWidget):
     def __init__(self, parent=None):
         super().__init__(parent)
+        self.dic = Diccionario()
 
         self.initUI()
     def initUI(self):
@@ -18,9 +22,23 @@ class NodeEditorWnd(QWidget):
         self.grScene = QDMGraphicsScene()
 
         # Crear vista de graficos
-        self.view = QGraphicsView(self)
-        self.view.setScene(self.grScene)
+        self.view = QDMGraphicsView(self.grScene, self)
         self.layout.addWidget(self.view)
 
-        self.setWindowTitle("PDI Nodos")
+        self.setWindowTitle(self.dic.tituloVentana) # Poner el título a la ventana desde el Diccionario
         self.show()
+
+        self.addDebugContent()
+
+
+    def addDebugContent(self):
+        verde = QBrush(Qt.green)
+        oultLine = QPen(Qt.black)
+        oultLine.setWidth(3)
+        rect = self.grScene.addRect(-100, -100, 80, 100,  oultLine, verde)
+        rect.setFlag(QGraphicsItem.ItemIsMovable)
+        rect.setFlag(QGraphicsItem.ItemIsSelectable)
+
+        rect2 = self.grScene.addRect(-100, -100, 80, 100,  oultLine, QBrush(Qt.red))
+        rect2.setFlag(QGraphicsItem.ItemIsMovable)
+        rect2.setFlag(QGraphicsItem.ItemIsSelectable)
