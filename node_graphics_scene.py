@@ -6,8 +6,10 @@ from PyQt5.QtGui import *
 
 
 class QDMGraphicsScene(QGraphicsScene):
-    def __init__(self, parent=None):
+    def __init__(self, scene, parent=None):
         super().__init__(parent)
+
+        self.scene = scene
 
         # Configuracion
         self.tamCuadricula = 20
@@ -21,10 +23,10 @@ class QDMGraphicsScene(QGraphicsScene):
         self.lapizGrueso = QPen(self.colorGrueso)
         self.lapizGrueso.setWidth(2)
 
-        ancho, alto = 64000, 64000
-        self.setSceneRect(-ancho // 2, -alto // 2, ancho, alto)
-
         self.setBackgroundBrush(self.colorFondo)
+
+    def setGrScene(self, ancho, alto):
+        self.setSceneRect(-ancho // 2, -alto // 2, ancho, alto)
 
     def drawBackground(self, painter, rect):
         super().drawBackground(painter, rect)

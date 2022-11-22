@@ -1,9 +1,10 @@
 from PyQt5.QtWidgets import *
-from node_graphics_scene import QDMGraphicsScene
 from node_graphics_view import QDMGraphicsView
+from node_node import Node
 from diccionario import Diccionario
 from PyQt5.QtGui import *
 from PyQt5.QtCore import *
+from node_scene import Scene
 
 class NodeEditorWnd(QWidget):
     def __init__(self, parent=None):
@@ -19,16 +20,19 @@ class NodeEditorWnd(QWidget):
         self.setLayout(self.layout)
 
         #Crear graficos de la escena
-        self.grScene = QDMGraphicsScene()
+        self.scene = Scene()
+        #self.grScene = self.scene.grScene
+
+        node = Node(self.scene, "Mi nodo de prueba")
 
         # Crear vista de graficos
-        self.view = QDMGraphicsView(self.grScene, self)
+        self.view = QDMGraphicsView(self.scene.grScene, self)
         self.layout.addWidget(self.view)
 
         self.setWindowTitle(self.dic.tituloVentana) # Poner el título a la ventana desde el Diccionario
         self.show()
 
-        self.addDebugContent()
+        #self.addDebugContent()
 
 
     def addDebugContent(self):
