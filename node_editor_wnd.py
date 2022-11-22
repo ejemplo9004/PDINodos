@@ -11,6 +11,9 @@ class NodeEditorWnd(QWidget):
         super().__init__(parent)
         self.dic = Diccionario()
 
+        self.stylesheet_filename = "qss/nodestyle.qss"
+        self.loadStylesheet(self.stylesheet_filename)
+
         self.initUI()
     def initUI(self):
         self.setGeometry(200, 200, 800, 600)
@@ -46,3 +49,9 @@ class NodeEditorWnd(QWidget):
         rect2 = self.grScene.addRect(-100, -100, 80, 100,  oultLine, QBrush(Qt.red))
         rect2.setFlag(QGraphicsItem.ItemIsMovable)
         rect2.setFlag(QGraphicsItem.ItemIsSelectable)
+
+    def loadStylesheet(self, filename):
+        file = QFile(filename)
+        file.open(QFile.ReadOnly | QFile.Text)
+        stylesheet = file.readAll()
+        QApplication.instance().setStyleSheet(str(stylesheet, encoding='utf-8'))

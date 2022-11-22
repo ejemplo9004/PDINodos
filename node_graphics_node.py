@@ -3,16 +3,18 @@ from PyQt5.QtCore import *
 from PyQt5.QtGui import *
 
 class QDMGraphicsNode(QGraphicsItem):
-    def __init__(self, nodo, titulo = "Nodo sin titulo", parent=None):
+    def __init__(self, nodo, parent=None):
         super().__init__(parent)
-        self._titulo = titulo
+        self.node = nodo
+        self.content = self.node.content
+
         self._titulo_color = Qt.white
         self._titulo_font = QFont("Ubuntu", 10)
 
 
         self.width = 190
         self.height = 240
-        self.edge_size = 10.0
+        self.edge_size = 10
         self.title_heigth = 26
         self._padding = 10.0
 
@@ -22,11 +24,25 @@ class QDMGraphicsNode(QGraphicsItem):
         self._brush_title = QBrush(QColor("#FF313131"))
         self._brush_background = QBrush(QColor("#DD121212"))
 
+        #Iniciar título
         self.initTitulo()
-        self.titulo = titulo
+        self.titulo = self.node.titulo
+
+        #Iniciar Sockets
+
+
+        #Iniciar contenido
+        self.initContent()
 
         self.initUI()
 
+
+    @property
+    def titulo(self): return self._titulo
+    @titulo.setter
+    def titulo(self, valor):
+        self._titulo = valor
+        self.titulo_item.setPlainText(self._titulo)
 
     def boundingRect(self):
         return QRectF(
@@ -49,12 +65,15 @@ class QDMGraphicsNode(QGraphicsItem):
             self.width - 2 * self._padding
         )
 
-    @property
-    def titulo(self): return self._titulo
-    @titulo.setter
-    def titulo(self, valor):
-        self._titulo = valor
-        self.titulo_item.setPlainText(self._titulo)
+    def initContent(self):
+        self.grContent = QGraphicsProxyWidget(self)
+        self.content.setGeometry(
+            self.edge_size,
+            self.title_heigth + self.edge_size,
+            self.width - 2*self.edge_size,
+            self.height - 2 * self.edge_size - self.title_heigth
+        )
+        self.grContent.setWidget(self.content)
 
     def paint(self, painter, QStyleOptionGraphicsItem, widget=None):
         #Titulo
