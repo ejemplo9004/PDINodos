@@ -1,5 +1,6 @@
 from PyQt5.QtWidgets import *
 from node_graphics_view import QDMGraphicsView
+from node_socket import Socket
 from node_node import Node
 from diccionario import Diccionario
 from PyQt5.QtGui import *
@@ -26,7 +27,8 @@ class NodeEditorWnd(QWidget):
         self.scene = Scene()
         #self.grScene = self.scene.grScene
 
-        node = Node(self.scene, "Mi nodo de prueba")
+        node = Node(self.scene, "Morion Nodo", inputs=[1, 2, 3], outputs=[1])
+        #node = Node(self.scene, "Morion Nodo", inputs=[], outputs=[])
 
         # Crear vista de graficos
         self.view = QDMGraphicsView(self.scene.grScene, self)
