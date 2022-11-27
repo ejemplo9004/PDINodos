@@ -1,5 +1,6 @@
 from PyQt5.QtWidgets import *
 from node_graphics_view import QDMGraphicsView
+from node_edge import Edge
 from node_socket import Socket
 from node_node import Node
 from diccionario import Diccionario
@@ -27,8 +28,7 @@ class NodeEditorWnd(QWidget):
         self.scene = Scene()
         #self.grScene = self.scene.grScene
 
-        node = Node(self.scene, "Morion Nodo", inputs=[1, 2, 3], outputs=[1])
-        #node = Node(self.scene, "Morion Nodo", inputs=[], outputs=[])
+        self.addNodes()
 
         # Crear vista de graficos
         self.view = QDMGraphicsView(self.scene.grScene, self)
@@ -39,6 +39,17 @@ class NodeEditorWnd(QWidget):
 
         #self.addDebugContent()
 
+    def addNodes(self):
+        node1 = Node(self.scene, "Morion Nodo 1", inputs=[1, 2, 3], outputs=[1, 2, 3])
+        node2 = Node(self.scene, "Morion Nodo 2", inputs=[1, 2, 3], outputs=[1])
+        node3 = Node(self.scene, "Morion Nodo 3", inputs=[1, 2, 3], outputs=[1, 2])
+
+        node1.setPos(-350, -250)
+        node2.setPos(-70, 0)
+        node3.setPos(200, -100)
+
+        edge1 = Edge(self.scene, node1.outputs[0], node2.inputs[0], edge_type=2)
+        edge2 = Edge(self.scene, node2.outputs[0], node3.inputs[0], edge_type=2)
 
     def addDebugContent(self):
         verde = QBrush(Qt.green)

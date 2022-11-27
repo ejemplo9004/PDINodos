@@ -3,13 +3,20 @@ from PyQt5.QtGui import *
 from PyQt5.QtCore import *
 
 class QDMGraphicsSocket(QGraphicsItem):
-    def __init__(self, parent=None):
+    def __init__(self, parent=None, socket_type=0):
         super().__init__(parent)
 
         self.radio = 6
-        self.outline_width = 2
-        self._color_background = QColor("#FFFF7700")
-        self._color_outline = QColor("FF000000")
+        self.outline_width = 3
+        self._colors =[
+            QColor("#E9EA06"),
+            QColor("#7574E3"),
+            QColor("#006F5C"),
+            QColor("#D707DE"),
+            QColor("#FFFFFFFF"),
+        ]
+        self._color_background = QColor("#FF000000")
+        self._color_outline = self._colors[socket_type]
 
         self._pen = QPen(self._color_outline)
         self._pen.setWidth(self.outline_width)
