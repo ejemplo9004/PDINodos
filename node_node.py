@@ -2,14 +2,14 @@ from node_graphics_node import QDMGraphicsNode
 from node_content_widget import QDMNodeContentWidget
 from node_socket import Socket, LEFT_TOP, LEFT_BOTTOM, RIGT_TOP, RIGTH_BOTTOM
 
-
+DEBUG = False
 class Node():
     def __init__(self, scene, titulo="Nodo Morion", inputs=[], outputs=[]):
         self.scene = scene
         self.titulo = titulo
         self.socket_spacing = 21
 
-        self.content = QDMNodeContentWidget()
+        self.content = QDMNodeContentWidget(self)
         self.gNode = QDMGraphicsNode(self)
 
         self.scene.addNode(self)
@@ -31,6 +31,8 @@ class Node():
             counter += 1
             self.outputs.append(socket)
 
+    def __str__(self):
+        return "<Edge %s·%s>" % (hex(id(self))[2:5], hex(id(self))[-3:])
     @property
     def pos(self):
         return self.gNode.pos() # viene de Qt
@@ -54,3 +56,15 @@ class Node():
         for soket in self.inputs + self.outputs:
             if soket.hasEdge():
                 soket.edge.updatePositions()
+
+    def remove(self):
+        if DEBUG: print("Eliminando nodo ", self)
+        #Eliminar todos los Edges
+        for socket in self.inputs + self.outputs:
+            if socket.hasEdge():
+                socket.edge.remove()
+        #Eliminar el grNode
+        self.scene.grScene.removeItem(self.gNode)
+        self.gNode = None
+        #Eliminar el nodo de la escena
+        self.scene.removeNode(self)

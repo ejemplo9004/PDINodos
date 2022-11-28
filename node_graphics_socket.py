@@ -3,8 +3,9 @@ from PyQt5.QtGui import *
 from PyQt5.QtCore import *
 
 class QDMGraphicsSocket(QGraphicsItem):
-    def __init__(self, parent=None, socket_type=0):
-        super().__init__(parent)
+    def __init__(self, socket, socket_type=0):
+        self.socket = socket
+        super().__init__(socket.node.gNode)
 
         self.radio = 6
         self.outline_width = 3
@@ -15,6 +16,7 @@ class QDMGraphicsSocket(QGraphicsItem):
             QColor("#D707DE"),
             QColor("#FFFFFFFF"),
         ]
+        self.socket_type = socket_type
         self._color_background = QColor("#FF000000")
         self._color_outline = self._colors[socket_type]
 
@@ -22,6 +24,8 @@ class QDMGraphicsSocket(QGraphicsItem):
         self._pen.setWidth(self.outline_width)
         self._brush = QBrush(self._color_background)
 
+    def getColor(self):
+        return self._colors[self.socket_type]
     def paint(self, painter, QStyleOptionGraphicsItem, widget=None):
         #Pintar el circulo
         painter.setBrush(self._brush)

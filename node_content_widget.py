@@ -1,8 +1,10 @@
 from  PyQt5.QtWidgets import *
+from PyQt5.QtGui import *
 
 class QDMNodeContentWidget(QWidget):
-    def __init__(self, parent=None):
+    def __init__(self, node, parent=None):
         super().__init__(parent)
+        self.node = node
         self.initUI()
 
     def initUI(self):
@@ -12,4 +14,16 @@ class QDMNodeContentWidget(QWidget):
 
         self.wdg_label = QLabel("Morion ensayo de etiqueta")
         self.layout.addWidget(self.wdg_label)
-        self.layout.addWidget(QTextEdit("Fooo"))
+        self.layout.addWidget(QDMTextEdit("Fooo"))
+
+    def setEditingFlag(self, valor):
+        self.node.scene.grScene.views()[0].editingFlag = valor
+
+class QDMTextEdit(QTextEdit):
+    def focusInEvent(self, e: QFocusEvent):
+        self.parentWidget().setEditingFlag(True)
+        super().focusInEvent(e)
+
+    def focusOutEvent(self, e: QFocusEvent):
+        self.parentWidget().setEditingFlag(False)
+        super(QDMTextEdit, self).focusOutEvent(e)

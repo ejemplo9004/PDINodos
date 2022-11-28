@@ -41,7 +41,7 @@ class NodeEditorWnd(QWidget):
 
     def addNodes(self):
         node1 = Node(self.scene, "Morion Nodo 1", inputs=[1, 2, 3], outputs=[1, 2, 3])
-        node2 = Node(self.scene, "Morion Nodo 2", inputs=[1, 2, 3], outputs=[1])
+        node2 = Node(self.scene, "Morion Nodo 2", inputs=[1, 2, 3], outputs=[1,2,3,4])
         node3 = Node(self.scene, "Morion Nodo 3", inputs=[1, 2, 3], outputs=[1, 2])
 
         node1.setPos(-350, -250)
@@ -49,7 +49,7 @@ class NodeEditorWnd(QWidget):
         node3.setPos(200, -100)
 
         edge1 = Edge(self.scene, node1.outputs[0], node2.inputs[0], edge_type=2)
-        edge2 = Edge(self.scene, node2.outputs[0], node3.inputs[0], edge_type=2)
+        edge2 = Edge(self.scene, node2.outputs[2], node3.inputs[2], edge_type=2)
 
     def addDebugContent(self):
         verde = QBrush(Qt.green)

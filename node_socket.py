@@ -13,11 +13,14 @@ class Socket():
         self.position = position
         self.socket_type = socket_type
 
-        self.grScoket = QDMGraphicsSocket(self.node.gNode, self.socket_type)
+        self.grScoket = QDMGraphicsSocket(self, self.socket_type)
 
         self.grScoket.setPos(*self.node.getSocketPosition(index, position))
 
         self.edge = None
+
+    def __str__(self):
+        return "<Socket %s·%s>" % (hex(id(self))[2:5], hex(id(self))[-3:])
 
     def getSocketPosition(self):
         if DEBUG: print("    GSP: ", self.index, self.position, "node: ", self.node)

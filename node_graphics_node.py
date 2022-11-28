@@ -39,7 +39,10 @@ class QDMGraphicsNode(QGraphicsItem):
 
     def mouseMoveEvent(self, event):
         super().mouseMoveEvent(event)
-        self.node.updateConnectedEdges()
+
+        for nodo in self.scene().scene.nodes:
+            if nodo.gNode.isSelected():
+                nodo.updateConnectedEdges()
 
     @property
     def titulo(self): return self._titulo
@@ -62,6 +65,7 @@ class QDMGraphicsNode(QGraphicsItem):
 
     def initTitulo(self):
         self.titulo_item = QGraphicsTextItem(self)
+        self.titulo_item.node = self.node
         self.titulo_item.setDefaultTextColor(self._titulo_color)
         self.titulo_item.setFont(self._titulo_font)
         self.titulo_item.setPos(self._padding,0)
