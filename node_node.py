@@ -1,10 +1,15 @@
 from node_graphics_node import QDMGraphicsNode
 from node_content_widget import QDMNodeContentWidget
 from node_socket import Socket, LEFT_TOP, LEFT_BOTTOM, RIGT_TOP, RIGTH_BOTTOM
+from collections import OrderedDict
+from node_serializable import Serializable
 
 DEBUG = False
-class Node():
+
+
+class Node(Serializable):
     def __init__(self, scene, titulo="Nodo Morion", inputs=[], outputs=[]):
+        super().__init__()
         self.scene = scene
         self.titulo = titulo
         self.socket_spacing = 21
@@ -33,12 +38,14 @@ class Node():
 
     def __str__(self):
         return "<Edge %s·%s>" % (hex(id(self))[2:5], hex(id(self))[-3:])
+
     @property
     def pos(self):
-        return self.gNode.pos() # viene de Qt
+        return self.gNode.pos()  # viene de Qt
 
     def setPos(self, x, y):
         self.gNode.setPos(x, y)
+
     def getSocketPosition(self, index, position):
         if position in (LEFT_TOP, LEFT_BOTTOM):
             x = 0
@@ -59,12 +66,29 @@ class Node():
 
     def remove(self):
         if DEBUG: print("Eliminando nodo ", self)
-        #Eliminar todos los Edges
+        # Eliminar todos los Edges
         for socket in self.inputs + self.outputs:
             if socket.hasEdge():
                 socket.edge.remove()
-        #Eliminar el grNode
+        # Eliminar el grNode
         self.scene.grScene.removeItem(self.gNode)
         self.gNode = None
-        #Eliminar el nodo de la escena
+        # Eliminar el nodo de la escena
         self.scene.removeNode(self)
+
+    def serialize(self):
+        inputs, outputs = [], []
+        for socket in self.inputs: inputs.append(socket.serialize())
+        for socket in self.outputs: outputs.append(socket.serialize())
+        return OrderedDict([
+            ('id', self.id),
+            ('title', self.titulo),
+            ('pos_x', self.gNode.scenePos().x()),
+            ('pos_y', self.gNode.scenePos().y()),
+            ('inputs', inputs),
+            ('outputs', outputs),
+            ('content', self.content.serialize()),
+        ])
+
+    def deserialize(self, data, hashmap={}):
+        return False

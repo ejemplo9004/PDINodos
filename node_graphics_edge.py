@@ -45,11 +45,13 @@ class QDMGraphicsEdge(QGraphicsPathItem):
             painter.setPen(self._pen if not self.isSelected() else self._pen_selected)
         painter.setBrush(Qt.NoBrush)
         painter.drawPath(self.path())
+
     def intersectsWith(self, p1, p2):
         cutPath = QPainterPath(p1)
         cutPath.lineTo(p2)
-        path =self.calcPath()
+        path = self.calcPath()
         return cutPath.intersects(path)
+
     def calcPath(self):
         # Va a calcular la ruta desde un punto A a un B
         raise NotImplemented("Este método será sobreescrito en la implementación de los hijos")

@@ -168,6 +168,10 @@ class QDMGraphicsView(QGraphicsView):
                 self.deleteSelected()
             else:
                 super(QDMGraphicsView, self).keyPressEvent(event)
+        elif event.key() == Qt.Key_S and event.modifiers() & Qt.ControlModifier:
+            self.grScene.scene.saveToFile("grafo.json.txt")
+        elif event.key() == Qt.Key_O and event.modifiers() & Qt.ControlModifier:
+            self.grScene.scene.loadFromFile("grafo.json.txt")
         else:
             super().keyPressEvent(event)
     def cutIntersectingEdges(self):

@@ -1,0 +1,144 @@
+{
+    "id": 2013287944016,
+    "scene_width": 64000,
+    "scene_height": 64000,
+    "nodes": [
+        {
+            "id": 2013252804304,
+            "title": "Morion Nodo 1",
+            "pos_x": -350.0,
+            "pos_y": -250.0,
+            "inputs": [
+                {
+                    "id": 2013288188816,
+                    "index": 0,
+                    "position": 1
+                },
+                {
+                    "id": 2013288189456,
+                    "index": 1,
+                    "position": 2
+                },
+                {
+                    "id": 2013288192528,
+                    "index": 2,
+                    "position": 3
+                }
+            ],
+            "outputs": [
+                {
+                    "id": 2013288193168,
+                    "index": 0,
+                    "position": 1
+                },
+                {
+                    "id": 2013288193808,
+                    "index": 1,
+                    "position": 2
+                },
+                {
+                    "id": 2013288194448,
+                    "index": 2,
+                    "position": 3
+                }
+            ],
+            "content": {}
+        },
+        {
+            "id": 2013288195088,
+            "title": "Morion Nodo 2",
+            "pos_x": -70.0,
+            "pos_y": 0.0,
+            "inputs": [
+                {
+                    "id": 2013288195920,
+                    "index": 0,
+                    "position": 1
+                },
+                {
+                    "id": 2013288196560,
+                    "index": 1,
+                    "position": 2
+                },
+                {
+                    "id": 2013288197200,
+                    "index": 2,
+                    "position": 3
+                }
+            ],
+            "outputs": [
+                {
+                    "id": 2013288197904,
+                    "index": 0,
+                    "position": 1
+                },
+                {
+                    "id": 2013288198608,
+                    "index": 1,
+                    "position": 2
+                },
+                {
+                    "id": 2013288199312,
+                    "index": 2,
+                    "position": 3
+                },
+                {
+                    "id": 2013288200016,
+                    "index": 3,
+                    "position": 4
+                }
+            ],
+            "content": {}
+        },
+        {
+            "id": 2013288200720,
+            "title": "Morion Nodo 3",
+            "pos_x": 200.0,
+            "pos_y": -100.0,
+            "inputs": [
+                {
+                    "id": 2013288201616,
+                    "index": 0,
+                    "position": 1
+                },
+                {
+                    "id": 2013288267984,
+                    "index": 1,
+                    "position": 2
+                },
+                {
+                    "id": 2013288268688,
+                    "index": 2,
+                    "position": 3
+                }
+            ],
+            "outputs": [
+                {
+                    "id": 2013288269392,
+                    "index": 0,
+                    "position": 1
+                },
+                {
+                    "id": 2013288270096,
+                    "index": 1,
+                    "position": 2
+                }
+            ],
+            "content": {}
+        }
+    ],
+    "edges": [
+        {
+            "id": 2013288270800,
+            "edge_type": 2,
+            "start": 2013288193168,
+            "end": 2013288195920
+        },
+        {
+            "id": 2013288271376,
+            "edge_type": 2,
+            "start": 2013288199312,
+            "end": 2013288268688
+        }
+    ]
+}
