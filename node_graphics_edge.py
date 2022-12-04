@@ -20,9 +20,9 @@ class QDMGraphicsEdge(QGraphicsPathItem):
         self._pen = QPen(self._color)
         self._pen_selected = QPen(self._color_selected)
 
-        self._pen.setWidthF(3)
-        self._pen_selected.setWidthF(4)
-        self._pen_dragging.setWidthF(4)
+        self._pen.setWidthF(2)
+        self._pen_selected.setWidthF(1)
+        self._pen_dragging.setWidthF(1)
 
         self.setFlag(QGraphicsItem.ItemIsSelectable)
         self.setZValue(-1)
